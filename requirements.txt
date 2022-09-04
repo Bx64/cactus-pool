@@ -1,0 +1,5 @@
+flask
+flask-API
+requests_unixsocket
+solar-client
+solar-crypto

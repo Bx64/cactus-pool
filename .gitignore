@@ -1,0 +1,24 @@
+# config
+core/config/*config.ini*
+!core/config/*config.ini.example
+
+# unpaid json
+core/pool_unpaid.json
+
+# database
+core/data/*.db
+
+# pycache files
+*.pyc
+__pycache__/
+
+# emacs
+*~
+#*
+
+# Virtual environment
+.venv
+/.venv/
+
+# OS Files
+.DS_Store

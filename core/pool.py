@@ -2,6 +2,7 @@
 from __init__ import __version__, __version_info__
 from config.pool_config import PoolConfig
 from network.network import Network
+from utility.sql import Sql
 from utility.utility import Utility
 from flask import Flask, render_template
 from multiprocessing import Process
@@ -93,6 +94,20 @@ def index():
     return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=unpaid, tags=tags)
 
 
+@app.route('/payments')
+def payments():
+    sql.open_connection()
+    xactions = sql.history().fetchall()
+    sql.close_connection()
+
+    tx_data = []
+    for i in xactions:
+        data_list = [i[3], i[4], i[7]]
+        tx_data.append(data_list)
+
+    return render_template(poolconfig.pool_template + '_payments.html', tx_data=tx_data, tags=tags)
+
+
 # Handler for SIGINT and SIGTERM
 def sighandler(signum, frame):
     global server
@@ -132,6 +147,9 @@ if __name__ == '__main__':
     # load utility and client
     utility = Utility(network)
     client = utility.get_client()
+
+    # connect to tbw script database
+    sql = Sql()
 
     tags = {
        'dname': poolconfig.delegate,

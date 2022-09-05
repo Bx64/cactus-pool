@@ -23,34 +23,34 @@ def get_round(height):
     return (mod[0] + int(mod[1] > 0))
 
 
-def get_yield(netw_height, dblocks):
-    drounds = dblocks['meta']['count'] #number of forged blocks 
-
-    missed = 0
-    forged = 0
-    netw_round = get_round(netw_height)
-    last_forged_round = get_round(dblocks['data'][0]['height'])
-
-    if netw_round > last_forged_round + 1:
-        missed += netw_round - last_forged_round - 1
-    else:
-        forged += 1
-
-    if drounds > 1:
-        for i in range(0, drounds - 1):
-            cur_round = get_round(dblocks['data'][i]['height'])
-            prev_round = get_round(dblocks['data'][i + 1]['height'])
-            if prev_round < cur_round - 1:
-                if cur_round - prev_round - 1 > drounds - missed - forged:
-                    missed += drounds - missed - forged
-                    break
-                else:
-                    missed += cur_round - prev_round - 1
-            else:
-                forged += 1
-
-    yield_over_drounds = "{:.2f}".format(round((forged * 100)/(forged + missed)))
-    return yield_over_drounds
+#def get_yield(netw_height, dblocks):
+#    drounds = dblocks['meta']['count'] #number of forged blocks 
+#
+#    missed = 0
+#    forged = 0
+#    netw_round = get_round(netw_height)
+#    last_forged_round = get_round(dblocks['data'][0]['height'])
+#
+#    if netw_round > last_forged_round + 1:
+#        missed += netw_round - last_forged_round - 1
+#    else:
+#        forged += 1
+#
+#    if drounds > 1:
+#        for i in range(0, drounds - 1):
+#            cur_round = get_round(dblocks['data'][i]['height'])
+#            prev_round = get_round(dblocks['data'][i + 1]['height'])
+#            if prev_round < cur_round - 1:
+#                if cur_round - prev_round - 1 > drounds - missed - forged:
+#                    missed += drounds - missed - forged
+#                    break
+#                else:
+#                    missed += cur_round - prev_round - 1
+#            else:
+#                forged += 1
+#
+#    yield_over_drounds = "{:.2f}".format(round((forged * 100)/(forged + missed)))
+#    return yield_over_drounds
 
 
 @app.route('/')
@@ -58,17 +58,14 @@ def index():
     stats = {}
     ddata = client.delegates.get(poolconfig.delegate)
 
-    stats['forged']   = ddata['data']['blocks']['produced']
-    #s['missed'] = dstats['data']['blocks']['missed']
-    #s['missed'] = 0 # temp fix
-    stats['rank']     = ddata['data']['rank']
-    #s['productivity'] = dstats['data']['production']['productivity']
-    #s['productivity'] = 100 # temp fix
     stats['handle']   = ddata['data']['username']
     stats['wallet']   = ddata['data']['address']
+    stats['rank']     = ddata['data']['rank']
+    stats['forged']   = ddata['data']['blocks']['produced']
+    stats['productivity'] = ddata['data']['blocks']['productivity'] # replacement for yield
+    stats['rewards']  = ddata['data']['forged']['total']
     stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
-    stats['rewards']  = ddata['data']['forged']['total']
     stats['approval'] = ddata['data']['votesReceived']['percent']
     stats['version']  = ddata['data']['version']
 
@@ -86,12 +83,12 @@ def index():
     with open('/home/{}/cactus-pool/core/pool_unpaid.json'.format(poolconfig.username), 'r') as f:
         unpaid = json.load(f)
 
-    # get synchronisation data & yield
+    # get synchronisation data (# yield)
     node_sync_data = client.node.syncing()
     stats['synced'] = 'Syncing' if node_sync_data['data']['syncing'] else 'Synced'
     stats['behind'] = node_sync_data['data']['blocks']
     stats['height'] = node_sync_data['data']['height']
-    stats['yield'] = get_yield(stats['height'], dblocks)
+#    stats['yield'] = get_yield(stats['height'], dblocks)
 
     return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=unpaid, tags=tags)
 

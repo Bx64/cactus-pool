@@ -49,14 +49,12 @@ cd ~/cactus-pool/core && pm2 start pool.json
 
 0. The cronjob is required to not have your node be forced to re-run the pending payments check on every refresh, as `cactus-tbw` is a core plugin.
 
-1. After the repository has been cloned you need to open the [config](./core/config/pool_config.ini) and change it to your liking (see [Available Configuration Options](#available-configuration-options))
-
-Below is the example config. You need to update `network`, `username`, `delegate` and all items under `[pool]`.
+1. After the repository has been cloned you need to open the [config](./core/config/pool_config.ini) and change it to your liking (see [Available Configuration Options](#available-configuration-options)). Below is the example config. You need to update the values of `network`, `username`, `delegate` and the values of the items under `[pool]`.
 
 ```
 [static]
 atomic = 100000000
-network = solar_testnet
+network = testnet
 username = username
 
 [delegate]
@@ -85,8 +83,8 @@ Python 3.6+ is required.
 ### [static]
 | Option | Default Setting | Description | 
 | :--- | :---: | :--- |
-| atomic | 100000000 | atomic value - do not change |
-| network | solar_testnet | solar_testnet or solar_mainnet|
+| atomic | 100000000 | Atomic value - **do not change** |
+| network | testnet | Testnet or mainnet |
 | username | username | This is the postgresql database username (usually your OS username) |
 
 ### [delegate]
@@ -99,11 +97,11 @@ Python 3.6+ is required.
 | :--- | :---: | :--- |
 | pool_ip | xx.xx.xx.xx | IP of the node the pool is installed on |
 | pool_port | 5000 | Port for pool |
-| pool_template | bfx | Set the pool website template - only option currently |
-| explorer | https://texplorer.solar.org | The address of the explorer for the coin. |
-| coin | tSXP | Coin |
+| pool_template | bfx | Set the pool website template - only option |
+| explorer | https://texplorer.solar.org | The address of the explorer for the network |
+| coin | tSXP | tSXP or SXP |
 | proposal1 | https://delegates.solar.org/delegates/xxxx | Link to delegate proposal |
-| proposal2 | https://yy.yy.yy | Link to the delegate proposal in different language |
+| proposal2 | https://yy.yy.yy | Link to the proposal in different language |
 | proposal2_lang | CC | Language (code) of the second proposal |
 
 ### [logging]
@@ -120,7 +118,8 @@ Python 3.6+ is required.
 ## Changelog
 
 ### 0.0.1
-- initial release
+
+- Initial release
 
 ## Security
 

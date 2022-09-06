@@ -1,6 +1,6 @@
 [static]
 atomic = 100000000
-network = solar_testnet
+network = testnet
 username = username
 
 [delegate]

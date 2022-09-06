@@ -68,7 +68,7 @@ def index():
     stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
     stats['approval'] = ddata['data']['votesReceived']['percent']
-    stats['version']  = ddata['data']['version']
+    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
 
     # get all forged blocks in reverse chronological order, first page, max 100 as default
     dblocks = client.delegates.blocks(poolconfig.delegate) 

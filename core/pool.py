@@ -11,6 +11,7 @@ from solar_client import SolarClient
 import datetime
 import json
 import logging
+import os.path
 import requests_unixsocket
 import signal
 import sys
@@ -121,7 +122,12 @@ if __name__ == '__main__':
     # get configuration
     poolconfig = PoolConfig()
     if (poolconfig.error):
-        print("FATAL: pool_config.ini not found! Terminating POOL.", file=sys.stderr)
+        print("FATAL: pool_config.ini not found, please fix your configuration file! Terminating POOL.", file=sys.stderr)
+        sys.exit(1)
+
+    # check if pool_unpaid.json exists
+    if not os.path.exists('./pool_unpaid.json'):
+        print("FATAL: pool_unpaid.json not found, please run the poolupdate.py script before restarting! Terminating POOL.", file=sys.stderr)
         sys.exit(1)
 
     # set logging

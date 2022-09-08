@@ -49,6 +49,15 @@ def index():
     # get pending balances from file
     with open('/home/{}/cactus-pool/core/pool_unpaid.json'.format(poolconfig.username), 'r') as f:
         unpaid = json.load(f)
+        int_unpaid = {k:int(v) for k, v in unpaid.items()}
+        sorted_unpaid = sorted(int_unpaid.values(), reverse=True)
+        sorted_unpaid_dict = {}
+        for i in sorted_unpaid:
+            for k in int_unpaid.keys():
+                if int_unpaid[k] == i:
+                    sorted_unpaid_dict[k] = int_unpaid[k]
+                    break
+        pend_total = sum(sorted_unpaid_dict.values())
 
     # get synchronisation data (# yield)
     node_sync_data = client.node.syncing()
@@ -56,7 +65,7 @@ def index():
     stats['behind'] = node_sync_data['data']['blocks']
     stats['height'] = node_sync_data['data']['height']
 
-    return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=unpaid, tags=tags)
+    return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=sorted_unpaid_dict, pendtotal=pend_total, tags=tags)
 
 
 @app.route('/payments')

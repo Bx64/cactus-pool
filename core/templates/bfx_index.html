@@ -87,11 +87,22 @@
                 </thead>
                 <tbody>
                   {% for r in pend %}
+                    {% if (loop.index == 1) %}
+                      <tr class="summaryrow">
+                          <td>Total</a></td>
+                          <td class="total"><p style="color:green">{{ "{:,.8f}".format((pendtotal|float)/100000000) }}</p></td>
+                      </tr>
                        <tr>
                           <td><a href="{{ tags['explorer'] }}/wallets/{{ r }}" target="_blank">{{ r }}</a></td>
                           <td class="pending">{{ "{:,.8f}".format((pend[r]|float)/100000000) }}</td>
                       </tr>
-                   {% endfor %}
+                    {% else %}
+                       <tr>
+                          <td><a href="{{ tags['explorer'] }}/wallets/{{ r }}" target="_blank">{{ r }}</a></td>
+                          <td class="pending">{{ "{:,.8f}".format((pend[r]|float)/100000000) }}</td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
                 </tbody>
             </table>
 

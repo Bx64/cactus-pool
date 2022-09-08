@@ -10,7 +10,7 @@ if (poolconfig.error):
     sys.exit(1)
 
 session = requests_unixsocket.Session()
-r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network), json = {"username": "poolconfig.delegate"})
+r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network), json = {"username": poolconfig.delegate})
 unpaid = r.json()
 
 with open('pool_unpaid.json', 'w') as outfile:

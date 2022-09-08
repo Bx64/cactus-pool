@@ -117,7 +117,7 @@ Python 3.6+ is required.
 
 ## Changelog
 
-### 0.0.1
+### 0.1.0
 
 - Initial release
 

@@ -15,7 +15,7 @@ class PoolConfig:
             self.delegate(config)
             self.pool(config)
             self.logging(config)
-        
+
     def static(self, c):
         self.atomic = int(c.get('static', 'atomic'))
         self.network = c.get('static', 'network')
@@ -33,8 +33,7 @@ class PoolConfig:
         self.proposal1 = c.get('pool', 'proposal1', fallback="https://delegates.solar.org/delegates/xxxx")
         self.proposal2 = c.get('pool', 'proposal2', fallback="https://yy.yy.yy/")
         self.proposal2_lang = c.get('pool', 'proposal2_lang', fallback="LANG")
-        
+
     def logging(self, c):
         self.loglevel = c.get('logging', 'loglevel')
         self.formatter = c.get('logging', 'formatter')
-        

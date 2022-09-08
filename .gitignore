@@ -5,9 +5,6 @@ core/config/*config.ini*
 # unpaid json
 core/pool_unpaid.json
 
-# database
-core/data/*.db
-
 # pycache files
 *.pyc
 __pycache__/

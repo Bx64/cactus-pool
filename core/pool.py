@@ -91,7 +91,7 @@ def sighandler(signum, frame):
     return
 
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     # get configuration
     poolconfig = PoolConfig()
     if (poolconfig.error):
@@ -122,7 +122,7 @@ if __name__ == '__main__':
 
     # load network
     network = Network(poolconfig.network)
-    
+
     # load utility and client
     utility = Utility(network)
     client = utility.get_client()

@@ -17,11 +17,11 @@ class Sql:
     def open_connection(self):
         self.connection = sqlite3.connect(self.data_path)
         self.cursor = self.connection.cursor()
-    
+
     def close_connection(self):
         self.cursor.close()
         self.connection.close()
-    
+
     def fetchall(self):
         return self.cursor.fetchall()
 

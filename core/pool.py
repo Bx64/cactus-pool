@@ -76,7 +76,7 @@ def payments():
 
     tx_data = []
     for i in xactions:
-        data_list = [i[3], i[4], datetime.date.fromtimestamp(i[7])]
+        data_list = [i[3], i[4], datetime.datetime.fromtimestamp(i[7])]
         tx_data.append(data_list)
 
     return render_template(poolconfig.pool_template + '_payments.html', tx_data=tx_data, tags=tags)

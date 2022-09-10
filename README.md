@@ -84,7 +84,7 @@ Python 3.6+ is required.
 | Option | Default Setting | Description | 
 | :--- | :---: | :--- |
 | atomic | 100000000 | Atomic value - **do not change** |
-| network | testnet | Testnet or mainnet |
+| network | testnet | testnet or mainnet |
 | username | username | This is the postgresql database username (usually your OS username) |
 
 ### [delegate]

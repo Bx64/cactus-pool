@@ -30,17 +30,15 @@ def index():
     stats['rank']     = ddata['data']['rank']
     stats['forged']   = ddata['data']['blocks']['produced']
     stats['productivity'] = ddata['data']['blocks']['productivity']
-    stats['rewards']  = ddata['data']['forged']['total']
-    stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
+    stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['approval'] = ddata['data']['votesReceived']['percent']
-    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
+#    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
 
     # get all forged blocks in reverse chronological order, first page, max 100 as default
     dblocks = client.delegates.blocks(poolconfig.delegate) 
     stats['lastforged_no'] = dblocks['data'][0]['height']
     stats['lastforged_id'] = dblocks['data'][0]['id']
-    stats['lastforged_ts'] = dblocks['data'][0]['timestamp']['human']
     stats['lastforged_unix'] = dblocks['data'][0]['timestamp']['unix']
     age = divmod(int(time.time() - stats['lastforged_unix']), 60)
     stats['lastforged_ago'] = "{0}:{1}".format(age[0],age[1])
@@ -57,12 +55,12 @@ def index():
                 if int_unpaid[k] == i:
                     sorted_unpaid_dict[k] = int_unpaid[k]
                     break
+        pend_total = 0
         pend_total = sum(sorted_unpaid_dict.values())
 
     # get synchronisation data (# yield)
     node_sync_data = client.node.syncing()
     stats['synced'] = 'Syncing' if node_sync_data['data']['syncing'] else 'Synced'
-    stats['behind'] = node_sync_data['data']['blocks']
     stats['height'] = node_sync_data['data']['height']
 
     return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=sorted_unpaid_dict, pendtotal=pend_total, tags=tags)

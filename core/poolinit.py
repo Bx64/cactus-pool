@@ -6,7 +6,7 @@ import requests_unixsocket
 # get configuration
 poolconfig = PoolConfig()
 if (poolconfig.error):
-    print("FATAL: pool_config.ini not found! Terminating POOL.", file=sys.stderr)
+    print("FATAL: pool_config.ini not found, please fix your configuration file! Terminating POOL.", file=sys.stderr)
     sys.exit(1)
 
 # request unpaid balances & write to file

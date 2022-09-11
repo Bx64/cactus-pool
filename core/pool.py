@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     # check if pool_unpaid.json exists
     if not os.path.exists('./pool_unpaid.json'):
-        print("FATAL: pool_unpaid.json not found, please run the poolupdate.py script before restarting! Terminating POOL.", file=sys.stderr)
+        print("FATAL: pool_unpaid.json not found, please run the poolinit.py script before restarting! Terminating POOL.", file=sys.stderr)
         sys.exit(1)
 
     # set logging
@@ -139,3 +139,17 @@ if __name__ == '__main__':
     #app.run(host=data.pool_ip, port=data.pool_port)
     server = Process(target=app.run, args=(poolconfig.pool_ip, poolconfig.pool_port))
     server.start()
+
+    # loop: request pending balance & write to file
+    while True:
+        start_time = time.process_time()
+        session = requests_unixsocket.Session()
+        r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network), json = {"username": poolconfig.delegate})
+        unpaidloop = r.json()
+
+        with open('pool_unpaid.json', 'w') as outfile:
+            json.dump(unpaidloop, outfile)
+        end_time = time.process_time()
+        elapsed_time = end_time - start_time
+        timer = 600 - elapsed_time
+        killsig.wait(timer)

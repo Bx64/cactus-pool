@@ -35,19 +35,16 @@ cp ~/cactus-pool/core/config/pool_config.ini.example ~/cactus-pool/core/config/p
 # Fill out config (see below)
 nano ~/cactus-pool/core/config/pool_config.ini
 
-# Setup a cronjob to update the unpaid balances (remember to change $USER)
-*/15 * * * * cd /home/$USER/cactus-pool/core && python3 poolupdate.py
-
-# With your cactus-tbw core plugin fully synced, run the first pending balances check manually
-cd ~/cactus-pool/core && python3 poolupdate.py
+# With your cactus-tbw core plugin fully synced, run the first pending balances check manually (only required for initialisation!)
+cd ~/cactus-pool/core && python3 poolinit.py
 
 # Start the dashboard with pm2
 cd ~/cactus-pool/core && pm2 start pool.json
+
+# Congratulations! Your pool dashboard will now automatically update the pending balances every 10 minutes.
 ```
 
 ## Configuration & Usage
-
-0. The cronjob is required to not have your node be forced to re-run the pending payments check on every refresh, as `cactus-tbw` is a core plugin.
 
 1. After the repository has been cloned you need to open the [config](./core/config/pool_config.ini) and change it to your liking (see [Available Configuration Options](#available-configuration-options)). Below is the example config. You need to update the values of `network`, `username`, `delegate` and the values of the items under `[pool]`.
 

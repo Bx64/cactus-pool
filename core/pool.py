@@ -142,14 +142,15 @@ if __name__ == '__main__':
 
     # loop: request pending balance & write to file
     while True:
-        start_time = time.process_time()
+        start_time = end_time = elapsed_time = timer = 0
+        start_time = time.perf_counter()
         session = requests_unixsocket.Session()
         r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network), json = {"username": poolconfig.delegate})
         unpaidloop = r.json()
 
         with open('pool_unpaid.json', 'w') as outfile:
             json.dump(unpaidloop, outfile)
-        end_time = time.process_time()
+        end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         timer = 600 - elapsed_time
         killsig.wait(timer)

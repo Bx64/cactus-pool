@@ -3,6 +3,7 @@ from config.pool_config import PoolConfig
 import json
 import requests_unixsocket
 
+
 # get configuration
 poolconfig = PoolConfig()
 if (poolconfig.error):

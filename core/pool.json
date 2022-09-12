@@ -5,7 +5,7 @@
         "script": "pool.py",
         "instances": 1,
         "exec_mode": "fork",
-        "exec_interpreter": "../.venv/bin/python3",
+        "exec_interpreter": "/usr/bin/python3",
         "interpreter_args": "-u",
         "autorestart": false,
         "stop_exit_codes": [0,1],

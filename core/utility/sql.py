@@ -1,7 +1,7 @@
 import sqlite3
 from config.pool_config import PoolConfig
-from datetime import datetime
 from pathlib import Path
+
 
 # get configuration
 poolconfig = PoolConfig()

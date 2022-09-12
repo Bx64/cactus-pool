@@ -20,14 +20,8 @@ yarn global add pm2
 # Clone cactus-pool repository
 git clone https://github.com/Bx64/cactus-pool && cd ~/cactus-pool
 
-# Install and activate virtual environment
-python3 -m venv .venv && . .venv/bin/activate
-
 # Install requirements
 pip3 install -r requirements.txt
-
-# Deactivate virtual environment
-deactivate
 
 # Clone pool config example
 cp ~/cactus-pool/core/config/pool_config.ini.example ~/cactus-pool/core/config/pool_config.ini

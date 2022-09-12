@@ -1,6 +1,7 @@
 from configparser import RawConfigParser
 from pathlib import Path
 
+
 class PoolConfig:
     def __init__(self):
         self.home = str(Path.home())

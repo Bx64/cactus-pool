@@ -15,7 +15,9 @@ yarn global add pm2
 ## Clean / New Installation
 
 ```sh
-# Install and sync relay server + cactus-tbw core plugin
+# Install and sync relay server + install and configure cactus-tbw core plugin
+# See respective repositories for instructions on those installations
+# After you finish setting up your server and plugin, continue.
 
 # Clone cactus-pool repository
 git clone https://github.com/Bx64/cactus-pool && cd ~/cactus-pool
@@ -76,7 +78,7 @@ Python 3.6+ is required.
 | :--- | :---: | :--- |
 | atomic | 100000000 | Atomic value - **do not change** |
 | network | testnet | testnet or mainnet |
-| username | username | This is the postgresql database username (usually your OS username) |
+| username | username | Operating system username |
 
 ### [delegate]
 | Option | Default Setting | Description | 

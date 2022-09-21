@@ -74,7 +74,7 @@ def payments():
 
     tx_data = []
     for i in xactions:
-        data_list = [i[3], i[4], datetime.datetime.fromtimestamp(i[7])]
+        data_list = [i[2], i[3], datetime.datetime.fromtimestamp(i[6])]
         tx_data.append(data_list)
 
     return render_template(poolconfig.pool_template + '_payments.html', tx_data=tx_data, tags=tags)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         start_time = end_time = elapsed_time = timer = 0
         start_time = time.perf_counter()
         session = requests_unixsocket.Session()
-        r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network), json = {"username": poolconfig.delegate})
+        r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network))
         unpaidloop = r.json()
 
         with open('pool_unpaid.json', 'w') as outfile:

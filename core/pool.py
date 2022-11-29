@@ -48,13 +48,7 @@ def index():
     with open('/home/{}/cactus-pool/core/pool_unpaid.json'.format(poolconfig.username), 'r') as f:
         unpaid = json.load(f)
         int_unpaid = {k:int(v) for k, v in unpaid.items()}
-        sorted_unpaid = sorted(int_unpaid.values(), reverse=True)
-        sorted_unpaid_dict = {}
-        for i in sorted_unpaid:
-            for k in int_unpaid.keys():
-                if int_unpaid[k] == i:
-                    sorted_unpaid_dict[k] = int_unpaid[k]
-                    break
+        sorted_unpaid_dict = dict(sorted(int_unpaid.items(), key=lambda item: item[1], reverse=True))
         pend_total = 0
         pend_total = sum(sorted_unpaid_dict.values())
 

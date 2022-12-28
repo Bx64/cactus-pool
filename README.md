@@ -52,6 +52,7 @@ username = username
 
 [delegate]
 delegate = delegate
+share = percentage
 
 [pool]
 pool_ip = xx.xx.xx.xx
@@ -84,6 +85,7 @@ Python 3.6+ is required.
 | Option | Default Setting | Description | 
 | :--- | :---: | :--- |
 | delegate | delegate | Delegate name |
+| share | percentage | Payout share |
 
 ### [pool]
 | Option | Default Setting | Description | 

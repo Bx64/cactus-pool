@@ -33,6 +33,7 @@ def index():
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
     stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['approval'] = ddata['data']['votesReceived']['percent']
+    stats['share']    = poolconfig.share
 #    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
 
     # get all forged blocks in reverse chronological order, first page, max 100 as default
@@ -52,7 +53,7 @@ def index():
         pend_total = 0
         pend_total = sum(sorted_unpaid_dict.values())
 
-    # get synchronisation data (# yield)
+    # get synchronisation data
     node_sync_data = client.node.syncing()
     stats['synced'] = 'Syncing' if node_sync_data['data']['syncing'] else 'Synced'
     stats['height'] = node_sync_data['data']['height']

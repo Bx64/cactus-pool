@@ -24,7 +24,6 @@ class PoolConfig:
 
     def delegate(self, c):
         self.delegate = c.get('delegate', 'delegate')
-        self.share = c.get('delegate', 'share')
 
     def pool(self, c):
         self.pool_ip = c.get('pool', 'pool_ip', fallback="127.0.0.1")

@@ -5,7 +5,6 @@ username = username
 
 [delegate]
 delegate = delegate
-share = percentage
 
 [pool]
 pool_ip = xx.xx.xx.xx

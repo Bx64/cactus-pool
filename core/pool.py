@@ -12,6 +12,7 @@ import datetime
 import json
 import logging
 import os.path
+import requests
 import requests_unixsocket
 import signal
 import sys
@@ -33,7 +34,7 @@ def index():
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
     stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['approval'] = ddata['data']['votesReceived']['percent']
-    stats['share']    = poolconfig.share
+    stats['share']    = s['payout']
 #    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
 
     # get all forged blocks in reverse chronological order, first page, max 100 as default
@@ -119,6 +120,9 @@ if __name__ == '__main__':
     # load utility and client
     utility = Utility(network)
     client = utility.get_client()
+
+    # get share rate
+    s = requests.get('https://delegates.solar.org/api/delegates/{}'.format(poolconfig.delegate)).json()
 
     # connect to tbw script database
     sql = Sql()

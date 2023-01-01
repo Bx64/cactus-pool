@@ -26,6 +26,10 @@ def index():
     stats = {}
     ddata = client.delegates.get(poolconfig.delegate)
 
+    # request share rate
+    s = requests.get('https://delegates.solar.org/api/delegates/{}'.format(poolconfig.delegate)).json()
+
+    # get stats
     stats['handle']   = ddata['data']['username']
     stats['wallet']   = ddata['data']['address']
     stats['rank']     = ddata['data']['rank']
@@ -121,9 +125,6 @@ if __name__ == '__main__':
     utility = Utility(network)
     client = utility.get_client()
 
-    # get share rate
-    s = requests.get('https://delegates.solar.org/api/delegates/{}'.format(poolconfig.delegate)).json()
-
     # connect to tbw script database
     sql = Sql()
 
@@ -143,13 +144,16 @@ if __name__ == '__main__':
     while True:
         start_time = end_time = elapsed_time = timer = 0
         start_time = time.perf_counter()
+
         session = requests_unixsocket.Session()
         r = session.post('http+unix://%2Ftmp%2F{0}%2Fsolar-core%2F{1}%2Ftbw-pay.sock/unpaid'.format(poolconfig.username, poolconfig.network))
         unpaidloop = r.json()
 
         with open('pool_unpaid.json', 'w') as outfile:
             json.dump(unpaidloop, outfile)
+
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         timer = 600 - elapsed_time
+
         killsig.wait(timer)

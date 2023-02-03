@@ -3,4 +3,4 @@ epoch = 2022,03,16,18,00,00
 version = 30
 wif = 252
 api = 6003
-delegates = 53
+blockproducers = 53

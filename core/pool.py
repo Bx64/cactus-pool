@@ -24,31 +24,31 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     stats = {}
-    ddata = client.delegates.get(poolconfig.delegate)
+    ddata = client.delegates.get(poolconfig.blockproducer)
 
     # request share rate
-    s = requests.get('https://delegates.solar.org/api/delegates/{}'.format(poolconfig.delegate)).json()
+    s = requests.get('https://delegates.solar.org/api/delegates/{}'.format(poolconfig.blockproducer)).json()
 
     # get stats
     stats['handle']   = ddata['data']['username']
     stats['wallet']   = ddata['data']['address']
     stats['rank']     = ddata['data']['rank']
-    stats['forged']   = ddata['data']['blocks']['produced']
-    stats['productivity'] = ddata['data']['blocks']['productivity']
+    stats['produced']   = ddata['data']['blocks']['produced']
+    stats['reliability'] = ddata['data']['blocks']['productivity']
     stats['voters']   = int(ddata['data']['votesReceived']['voters'])
     stats['votes']    = "{:,.2f}".format(int(ddata['data']['votesReceived']['votes'])/poolconfig.atomic)
     stats['approval'] = ddata['data']['votesReceived']['percent']
     stats['share']    = s['payout']
-#    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.delegates else 'N/A'
+#    stats['version']  = ddata['data']['version'] if stats['rank'] <= network.blockproducers else 'N/A'
 
-    # get all forged blocks in reverse chronological order, first page, max 100 as default
-    dblocks = client.delegates.blocks(poolconfig.delegate) 
-    stats['lastforged_no'] = dblocks['data'][0]['height']
-    stats['lastforged_id'] = dblocks['data'][0]['id']
-    stats['lastforged_unix'] = dblocks['data'][0]['timestamp']['unix']
-    age = divmod(int(time.time() - stats['lastforged_unix']), 60)
-    stats['lastforged_ago'] = "{0}:{1}".format(age[0],age[1])
-    stats['forging'] = 'Forging' if stats['rank'] <= network.delegates else 'Standby'
+    # get all produced blocks in reverse chronological order, first page, max 100 as default
+    dblocks = client.delegates.blocks(poolconfig.blockproducer) 
+    stats['lastproduced_no'] = dblocks['data'][0]['height']
+    stats['lastproduced_id'] = dblocks['data'][0]['id']
+    stats['lastproduced_unix'] = dblocks['data'][0]['timestamp']['unix']
+    age = divmod(int(time.time() - stats['lastproduced_unix']), 60)
+    stats['lastproduced_ago'] = "{0}:{1}".format(age[0],age[1])
+    stats['active'] = 'Active' if stats['rank'] <= network.blockproducers else 'Standby'
 
     # get pending balances from file
     with open('/home/{}/cactus-pool/core/pool_unpaid.json'.format(poolconfig.username), 'r') as f:
@@ -129,7 +129,7 @@ if __name__ == '__main__':
     sql = Sql()
 
     tags = {
-       'dname': poolconfig.delegate,
+       'dname': poolconfig.blockproducer,
        'proposal1': poolconfig.proposal1,
        'proposal2': poolconfig.proposal2,
        'proposal2_lang': poolconfig.proposal2_lang,

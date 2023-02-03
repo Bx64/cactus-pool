@@ -2,14 +2,12 @@
 
 ## Prerequisites
 
-1. Install pip and python3.6 or above
-
-2. Install `pm2`
+1. `Python3.8` (native on Ubuntu 20.04+), `python3-pip`, `npm` and `pm2` packages are required. Install `pip`, `npm` & `pm2` with a sudo-user:
 
 ```bash
+sudo apt install python3-pip npm -y
+
 npm install pm2@latest -g
-# or
-yarn global add pm2
 ```
 
 ## Clean / New Installation
@@ -50,8 +48,8 @@ atomic = 100000000
 network = testnet
 username = username
 
-[delegate]
-delegate = delegate
+[blockproducer]
+blockproducer = blockproducer
 
 [pool]
 pool_ip = xx.xx.xx.xx
@@ -80,10 +78,10 @@ Python 3.6+ is required.
 | network | testnet | testnet or mainnet |
 | username | username | Operating system username |
 
-### [delegate]
+### [blockproducer]
 | Option | Default Setting | Description | 
 | :--- | :---: | :--- |
-| delegate | delegate | Delegate name |
+| blockproducer | blockproducer | Block producer username |
 
 ### [pool]
 | Option | Default Setting | Description | 
@@ -93,7 +91,7 @@ Python 3.6+ is required.
 | pool_template | bfx | Set the pool website template - only option |
 | explorer | https://texplorer.solar.org | The address of the explorer for the network |
 | coin | tSXP | tSXP or SXP |
-| proposal1 | https://delegates.solar.org/delegates/xxxx | Link to delegate proposal |
+| proposal1 | https://delegates.solar.org/delegates/xxxx | Link to block producer proposal |
 | proposal2 | https://yy.yy.yy | Link to the proposal in different language |
 | proposal2_lang | CC | Language (code) of the second proposal |
 

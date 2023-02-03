@@ -3,8 +3,8 @@ atomic = 100000000
 network = testnet
 username = username
 
-[delegate]
-delegate = delegate
+[blockproducer]
+blockproducer = blockproducer
 
 [pool]
 pool_ip = xx.xx.xx.xx

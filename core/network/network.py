@@ -18,4 +18,4 @@ class Network:
         self.version = int(c.get("network", "version"))
         self.wif = int(c.get("network", "wif"))
         self.api = int(c.get("network", "api"))
-        self.delegates = int(c.get("network", "delegates"))
+        self.blockproducers = int(c.get("network", "blockproducers"))

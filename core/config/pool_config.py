@@ -13,7 +13,7 @@ class PoolConfig:
         else:
             self.error = False
             self.static(config)
-            self.delegate(config)
+            self.blockproducer(config)
             self.pool(config)
             self.logging(config)
 
@@ -22,8 +22,8 @@ class PoolConfig:
         self.network = c.get('static', 'network')
         self.username = c.get('static', 'username')
 
-    def delegate(self, c):
-        self.delegate = c.get('delegate', 'delegate')
+    def blockproducer(self, c):
+        self.blockproducer = c.get('blockproducer', 'blockproducer')
 
     def pool(self, c):
         self.pool_ip = c.get('pool', 'pool_ip', fallback="127.0.0.1")

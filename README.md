@@ -55,7 +55,7 @@ blockproducer = blockproducer
 pool_ip = xx.xx.xx.xx
 pool_port = 5000
 pool_template = bfx
-explorer = https://texplorer.solar.org
+explorer = https://testnet.solarscan.com
 coin = tSXP
 proposal1 = https://delegates.solar.org/delegates/xxxx
 proposal2 = https://yy.yy.yy
@@ -76,7 +76,7 @@ Python 3.6+ is required.
 | :--- | :---: | :--- |
 | atomic | 100000000 | Atomic value - **do not change** |
 | network | testnet | testnet or mainnet |
-| username | username | Operating system username |
+| username | username | Operating System username |
 
 ### [blockproducer]
 | Option | Default Setting | Description | 
@@ -89,7 +89,7 @@ Python 3.6+ is required.
 | pool_ip | xx.xx.xx.xx | IP of the node the pool is installed on |
 | pool_port | 5000 | Port for pool |
 | pool_template | bfx | Set the pool website template - only option |
-| explorer | https://texplorer.solar.org | The address of the explorer for the network |
+| explorer | https://testnet.solarscan.com | The address of the explorer for the network |
 | coin | tSXP | tSXP or SXP |
 | proposal1 | https://delegates.solar.org/delegates/xxxx | Link to block producer proposal |
 | proposal2 | https://yy.yy.yy | Link to the proposal in different language |

@@ -50,10 +50,10 @@
                     <div class="alert alert-info" role="alert">Height: {{node['height']}} | {{node['synced']}}</div>
                 </div>
                 <div class="col-md-3">
-                    <div class="alert alert-info" role="alert"><a href="{{ tags['explorer'] }}/blocks/{{node['lastproduced_id']}}" target="_blank">Last produced:</a> {{node['lastproduced_no']}}, {{node['lastproduced_ago']}}&Prime; ago</div>
+                    <div class="alert alert-info" role="alert"><a href="{{ tags['explorer'] }}/block/{{node['lastproduced_id']}}" target="_blank">Last produced:</a> {{node['lastproduced_no']}}, {{node['lastproduced_ago']}}&Prime; ago</div>
                 </div>
                 <div class="col-md-3">
-                    <div class="alert alert-info" role="alert"><a href="{{ tags['explorer'] }}/wallets/{{node['wallet']}}/blocks" target="_blank">Total produced:</a> {{node['produced']}}</div>
+                    <div class="alert alert-info" role="alert"><a href="{{ tags['explorer'] }}/wallet/{{node['wallet']}}/blocks" target="_blank">Total produced:</a> {{node['produced']}}</div>
                 </div>
                 <div class="col-md-3">
                     <div class="alert alert-info" role="alert">Reliability<sup>(*)</sup>: {{node['reliability']}}%</div>
@@ -81,12 +81,12 @@
                           <td class="total"><p style="color:green">{{ "{:,.8f}".format((pendtotal|float)/100000000) }}</p></td>
                       </tr>
                        <tr>
-                          <td><a href="{{ tags['explorer'] }}/wallets/{{ r }}" target="_blank">{{ r }}</a></td>
+                          <td><a href="{{ tags['explorer'] }}/wallet/{{ r }}" target="_blank">{{ r }}</a></td>
                           <td class="pending">{{ "{:,.8f}".format((pend[r]|float)/100000000) }}</td>
                       </tr>
                     {% else %}
                        <tr>
-                          <td><a href="{{ tags['explorer'] }}/wallets/{{ r }}" target="_blank">{{ r }}</a></td>
+                          <td><a href="{{ tags['explorer'] }}/wallet/{{ r }}" target="_blank">{{ r }}</a></td>
                           <td class="pending">{{ "{:,.8f}".format((pend[r]|float)/100000000) }}</td>
                       </tr>
                     {% endif %}

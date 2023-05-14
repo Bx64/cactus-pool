@@ -65,7 +65,6 @@ def index():
 
     return render_template(poolconfig.pool_template + '_index.html', node=stats, pend=sorted_unpaid_dict, pendtotal=pend_total, tags=tags)
 
-
 @app.route('/payments')
 def payments():
     sql.open_connection()
@@ -78,6 +77,22 @@ def payments():
         tx_data.append(data_list)
 
     return render_template(poolconfig.pool_template + '_payments.html', tx_data=tx_data, tags=tags)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('40x.html'), 404
+
+@app.errorhandler(403)
+def page_not_found(e):
+    return render_template('40x.html'), 403
+
+@app.errorhandler(410)
+def page_not_found(e):
+    return render_template('40x.html'), 410
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('50x.html'), 500
 
 
 # Handler for SIGINT and SIGTERM

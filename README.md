@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. `Python3.8` (native on Ubuntu 20.04+), `python3-pip`, `npm` and `pm2` packages are required. Install `pip`, `npm` & `pm2` with a sudo-user:
+`Python3.8` (native on Ubuntu 20.04+), `python3-pip`, `npm` and `pm2` packages are required. Install `pip`, `npm` & `pm2` with a sudo-user:
 
 ```bash
 sudo apt install python3-pip npm -y
@@ -40,7 +40,7 @@ cd ~/cactus-pool/core && pm2 start pool.json
 
 ## Configuration & Usage
 
-1. After the repository has been cloned you need to open the [config](./core/config/pool_config.ini) and change it to your liking (see [Available Configuration Options](#available-configuration-options)). Below is the example config. You need to update the values of `network`, `username`, `delegate` and the values of the items under `[pool]`.
+After the repository has been cloned you need to open the [config](./core/config/pool_config.ini) and change it to your liking (see [Available Configuration Options](#available-configuration-options)). Below is the example config. You need to update the values of `network`, `username`, `delegate` and the values of the items under `[pool]`.
 
 ```
 [static]
@@ -65,8 +65,6 @@ proposal2_lang = CC
 loglevel = INFO
 formatter = %(levelname)s %(message)s
 ```
-
-Python 3.6+ is required.
 
 
 ## Available Configuration Options 
@@ -100,6 +98,11 @@ Python 3.6+ is required.
 | :--- | :---: | :--- |
 | loglevel | INFO | Can be turned to DEBUG in order to have full debug outputs |
 | formatter | %(levelname)s %(message)s | Log formatter |
+
+
+## Custom error pages
+
+You can edit the template pages to create your own error messages, or use the templates as they are.
 
 
 ## To Do
